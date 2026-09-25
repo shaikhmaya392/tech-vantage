@@ -7,7 +7,7 @@ export const metadata = buildMetadata({
   title: "Portfolio",
   path: "/portfolio",
   description:
-    "Browse Tech Vantage Now's portfolio of branding, web, mobile app, video, SEO and social media projects — real work with real, measurable results.",
+    "Browse Tech Vantage Now's portfolio — real logo, website, branding, animation, social media and NFT design work.",
 });
 
 export default function PortfolioPage() {
@@ -20,16 +20,16 @@ export default function PortfolioPage() {
         ])}
       />
       <PageHero
-        eyebrow="Our work"
-        title="Projects that speak for themselves"
-        description="A selection of brands we've designed, built and grown. Filter by service to see what we can do for you."
+        eyebrow="Our Portfolio"
+        title="Designs that speak for themselves"
+        description="A selection of our real work — filter by category and click any item to view it larger."
         breadcrumbs={[
           { name: "Home", path: "/" },
           { name: "Portfolio", path: "/portfolio" },
         ]}
       />
 
-      <section className="section bg-white">
+      <section className="section bg-black">
         <PortfolioGrid />
       </section>
 

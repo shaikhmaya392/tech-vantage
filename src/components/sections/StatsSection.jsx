@@ -4,8 +4,8 @@ import { stats } from "@/data/site";
 
 export default function StatsSection() {
   return (
-    <section className="relative bg-brand-gradient py-16 text-white">
-      <div className="absolute inset-0 bg-noise opacity-40" />
+    <section className="relative overflow-hidden bg-brand-gradient py-16 text-white">
+      <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="container-tv relative">
         <StaggerGroup className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((s) => (

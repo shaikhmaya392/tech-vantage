@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 const variants = {
   primary:
     "bg-brand text-white hover:bg-brand-600 shadow-glow hover:shadow-[0_0_50px_-8px_rgba(15,102,184,0.7)]",
-  dark: "bg-ink text-white hover:bg-ink-muted",
+  dark: "bg-white/10 text-white border border-white/15 hover:bg-white/20",
   outline:
-    "border border-ink/15 text-ink hover:border-brand hover:text-brand bg-transparent",
-  ghost: "text-ink hover:text-brand bg-transparent",
-  white: "bg-white text-ink hover:bg-white/90",
+    "border border-white/20 text-white hover:border-brand hover:text-brand-300 bg-transparent",
+  ghost: "text-white hover:text-brand-300 bg-transparent",
+  white: "bg-white text-black hover:bg-white/90",
 };
 
 const sizes = {

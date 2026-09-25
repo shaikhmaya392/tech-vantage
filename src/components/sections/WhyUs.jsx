@@ -9,10 +9,8 @@ export default function WhyUs() {
       <div className="absolute inset-0 bg-hero-grid opacity-70" />
       <div className="container-tv relative">
         <SectionHeading
-          light
           eyebrow="Why Tech Vantage"
-          title="Premium quality, without the guesswork"
-          description="We combine creative firepower with disciplined delivery — so you get work that looks incredible and actually ships on time."
+          title="What distinguishes Tech Vantage Now from the rest?"
         />
 
         <StaggerGroup className="mt-14 grid gap-6 md:grid-cols-3">

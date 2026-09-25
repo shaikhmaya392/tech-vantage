@@ -8,14 +8,14 @@ export const metadata = buildMetadata({
   title: "Get a Quote",
   path: "/get-a-quote",
   description:
-    "Request a free, no-obligation quote from Tech Vantage Now. Tell us about your project and get a tailored proposal within one business day.",
+    "Request a free quote from Tech Vantage Now. Get jaw-dropping designs — fill in your details and we'll get back to you as soon as we can.",
 });
 
 const perks = [
   "Free, no-obligation consultation",
-  "Tailored proposal & clear pricing",
-  "Response within one business day",
-  "Dedicated project point of contact",
+  "Get jaw-dropping designs",
+  "100% ownership rights & money-back guarantee",
+  "Dedicated project manager",
 ];
 
 export default function QuotePage() {
@@ -28,33 +28,33 @@ export default function QuotePage() {
         ])}
       />
       <PageHero
-        eyebrow="Get started"
+        eyebrow="Fill Out Your Details"
         title="Request your free quote"
-        description="Share a few details about your project and we'll craft a custom proposal — no strings attached."
+        description="Ready to discuss your project? Fill in your relevant details. We will get back to you as soon as we can."
         breadcrumbs={[
           { name: "Home", path: "/" },
           { name: "Get a Quote", path: "/get-a-quote" },
         ]}
       />
 
-      <section className="section bg-white">
+      <section className="section bg-black">
         <div className="container-tv grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <h2 className="heading-3">What happens next?</h2>
+            <h2 className="heading-3 text-white">Why work with us</h2>
             <ul className="mt-6 space-y-4">
               {perks.map((p) => (
                 <li key={p} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-white">
                     <Check className="h-3.5 w-3.5" />
                   </span>
-                  <span className="text-ink/70">{p}</span>
+                  <span className="text-white/70">{p}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-10 rounded-3xl bg-ink p-8 text-white">
-              <p className="text-lg font-medium">
-                &ldquo;Feeling overwhelmed? Let our consultants guide your
+            <div className="mt-10 rounded-3xl glass p-8">
+              <p className="text-lg font-medium text-white">
+                &ldquo;Feeling overwhelmed? Let our consultant guide your
                 way.&rdquo;
               </p>
               <p className="mt-3 text-sm text-white/50">

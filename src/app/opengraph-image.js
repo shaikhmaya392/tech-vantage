@@ -56,7 +56,7 @@ export default function OGImage() {
             maxWidth: 900,
           }}
         >
-          Your digital design & marketing powerhouse.
+          Custom Website, Logo, Animation & More.
         </div>
         <div
           style={{

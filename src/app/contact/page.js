@@ -10,14 +10,14 @@ export const metadata = buildMetadata({
   title: "Contact",
   path: "/contact",
   description:
-    "Get in touch with Tech Vantage Now. Call, email or send us a message and our team will respond within one business day.",
+    "Get in touch with Tech Vantage Now. Call, email or send us a message and our team will get back to you as soon as we can.",
 });
 
 const details = [
   { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
   { icon: Phone, label: "Phone", value: site.phone, href: `tel:${site.phoneHref}` },
   { icon: MapPin, label: "Office", value: site.address.full },
-  { icon: Clock, label: "Hours", value: "Mon–Fri, 9am–6pm ET" },
+  { icon: Clock, label: "Live Chat", value: "Available on site" },
 ];
 
 export default function ContactPage() {
@@ -30,38 +30,37 @@ export default function ContactPage() {
         ])}
       />
       <PageHero
-        eyebrow="Contact"
-        title="Let's start a conversation"
-        description="Have a project in mind or just want to say hi? We'd love to hear from you."
+        eyebrow="Get In Touch"
+        title="Let's create the future"
+        description="Have a project in mind? Fill in your details and we'll get back to you as soon as we can."
         breadcrumbs={[
           { name: "Home", path: "/" },
           { name: "Contact", path: "/contact" },
         ]}
       />
 
-      <section className="section bg-white">
+      <section className="section bg-black">
         <div className="container-tv grid gap-12 lg:grid-cols-5">
-          {/* Info */}
           <div className="lg:col-span-2">
-            <h2 className="heading-3">Get in touch</h2>
-            <p className="mt-3 text-ink/60">
-              Reach us through any of the channels below, or fill out the form
-              and we&apos;ll get back to you fast.
+            <h2 className="heading-3 text-white">Contact details</h2>
+            <p className="mt-3 text-white/60">
+              Reach us through any channel below, or use the form and we&apos;ll
+              respond fast.
             </p>
 
-            <div className="mt-8 space-y-5">
+            <div className="mt-8 space-y-4">
               {details.map((d) => {
                 const Cmp = d.icon;
                 const content = (
-                  <div className="flex items-start gap-4 rounded-2xl border border-black/5 bg-brand-50/40 p-5 transition-colors hover:border-brand/30">
+                  <div className="flex items-start gap-4 rounded-2xl glass p-5 transition-colors hover:border-brand/40">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
                       <Cmp className="h-5 w-5" />
                     </span>
                     <div>
-                      <div className="text-xs uppercase tracking-wide text-ink/40">
+                      <div className="text-xs uppercase tracking-wide text-white/40">
                         {d.label}
                       </div>
-                      <div className="font-medium text-ink">{d.value}</div>
+                      <div className="font-medium text-white">{d.value}</div>
                     </div>
                   </div>
                 );
@@ -76,8 +75,8 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-8">
-              <div className="mb-3 text-sm font-medium text-ink/60">
-                Follow us
+              <div className="mb-3 text-sm font-medium text-white/60">
+                Let&apos;s connect on social media
               </div>
               <div className="flex gap-3">
                 {site.socials.map((s) => (
@@ -87,7 +86,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.name}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 text-ink/60 transition-all hover:border-brand hover:bg-brand hover:text-white"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all hover:border-brand hover:bg-brand hover:text-white"
                   >
                     <Icon name={s.icon} className="h-5 w-5" />
                   </a>
@@ -96,7 +95,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Form */}
           <div className="lg:col-span-3">
             <Reveal direction="left">
               <ContactForm />
@@ -105,10 +103,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map */}
-      <section className="bg-white pb-20">
+      <section className="bg-black pb-20">
         <div className="container-tv">
-          <div className="overflow-hidden rounded-[2rem] border border-black/5">
+          <div className="overflow-hidden rounded-[2rem] border border-white/10">
             <iframe
               title="Tech Vantage Now office location"
               src="https://www.google.com/maps?q=60+Tower+Pl+Yonkers+NY+10703&output=embed"
@@ -116,7 +113,7 @@ export default function ContactPage() {
               height="400"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="border-0"
+              className="border-0 grayscale invert-[0.9]"
             />
           </div>
         </div>

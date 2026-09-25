@@ -1,197 +1,147 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Star } from "lucide-react";
-import { gsap } from "gsap";
-import { useGSAP } from "@/lib/useGSAP";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { site } from "@/data/site";
+import Icon from "@/components/ui/Icon";
 
-const rotatingWords = ["Design.", "Develop.", "Animate.", "Rank.", "Grow."];
+function useTypewriter(words, { typeSpeed = 65, deleteSpeed = 35, pause = 1500 } = {}) {
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex % words.length];
+    let timeout;
+
+    if (!deleting && text === current) {
+      timeout = setTimeout(() => setDeleting(true), pause);
+    } else if (deleting && text === "") {
+      setDeleting(false);
+      setWordIndex((i) => (i + 1) % words.length);
+    } else {
+      timeout = setTimeout(
+        () => {
+          setText((prev) =>
+            deleting
+              ? current.slice(0, prev.length - 1)
+              : current.slice(0, prev.length + 1)
+          );
+        },
+        deleting ? deleteSpeed : typeSpeed
+      );
+    }
+    return () => clearTimeout(timeout);
+  }, [text, deleting, wordIndex, words, typeSpeed, deleteSpeed, pause]);
+
+  return text;
+}
 
 export default function Hero() {
-  const root = useRef(null);
-
-  useGSAP(
-    (ctx) => {
-      const words = gsap.utils.toArray(".rotate-word");
-      if (!words.length) return;
-      gsap.set(words, { yPercent: 100, opacity: 0 });
-      gsap.set(words[0], { yPercent: 0, opacity: 1 });
-
-      const tl = gsap.timeline({ repeat: -1 });
-      words.forEach((word, i) => {
-        const next = words[(i + 1) % words.length];
-        tl.to(word, { yPercent: -100, opacity: 0, duration: 0.5, ease: "power2.in", delay: 1.6 })
-          .fromTo(
-            next,
-            { yPercent: 100, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
-            "<"
-          );
-      });
-
-      // floating orbs parallax
-      gsap.to(".orb", {
-        y: (i) => (i % 2 === 0 ? -30 : 30),
-        repeat: -1,
-        yoyo: true,
-        duration: 4,
-        ease: "sine.inOut",
-        stagger: 0.4,
-      });
-    },
-    { scope: root }
-  );
+  const typed = useTypewriter(site.heroTypewriter);
 
   return (
-    <section
-      ref={root}
-      className="relative flex min-h-screen items-center overflow-hidden bg-white pt-28"
-    >
-      {/* background */}
-      <div className="absolute inset-0 bg-hero-grid" />
-      <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="orb absolute -left-20 top-32 h-72 w-72 rounded-full bg-brand/20 blur-3xl" />
-      <div className="orb absolute -right-10 bottom-20 h-80 w-80 rounded-full bg-brand-300/20 blur-3xl" />
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-black">
+      {/* Background video */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={site.heroVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/70" />
+      <div className="absolute inset-0 bg-radial-brand opacity-70" />
 
-      <div className="container-tv relative grid items-center gap-12 lg:grid-cols-12">
-        {/* left */}
-        <div className="lg:col-span-7">
-          <motion.div
+      <div className="container-tv relative z-10 pt-28">
+        <div className="max-w-4xl">
+          <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="eyebrow"
           >
-            <Sparkles className="h-3.5 w-3.5" />
-            {site.experienceYears} years of premium digital craft
-          </motion.div>
+            Design agency based in the US · Premium digital services
+          </motion.span>
 
-          <h1 className="mt-6 heading-1 text-balance">
-            We help brands
-            <br />
-            <span className="relative inline-flex h-[1.1em] overflow-hidden align-bottom">
-              <span className="invisible">Develop.</span>
-              {rotatingWords.map((w, i) => (
-                <span
-                  key={w}
-                  className="rotate-word absolute left-0 gradient-text"
-                  style={{ opacity: i === 0 ? 1 : 0 }}
-                >
-                  {w}
-                </span>
-              ))}
-            </span>
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 max-w-xl lead"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="mt-6 heading-1 text-balance"
           >
-            {site.name} is your all-in-one digital agency — from logos and
-            websites to apps, animation, SEO and social. Beautiful design that
-            drives real, measurable results.
-          </motion.p>
+            Custom Website, Logo,
+            <br />
+            Animation <span className="gradient-text">& More.</span>
+          </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="mt-8 flex flex-wrap items-center gap-4"
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="mt-5 flex min-h-[2.5rem] items-center text-xl font-medium text-white/80 sm:text-2xl"
           >
-            <Link
-              href="/get-a-quote"
-              className="group inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 font-semibold text-white shadow-glow transition-all hover:bg-brand-600"
-            >
-              Start your project
+            <span className="text-brand-300">{typed}</span>
+            <span className="ml-1 inline-block h-6 w-0.5 animate-pulse bg-brand-300 sm:h-7" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-9 flex flex-wrap items-center gap-4"
+          >
+            <Link href="/get-a-quote" className="group btn-primary">
+              Let&apos;s Get Started
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-8 py-4 font-semibold text-ink transition-all hover:border-brand hover:text-brand"
-            >
-              View our work
+            <Link href="/portfolio" className="btn-outline">
+              View Our Portfolio
             </Link>
           </motion.div>
 
+          {/* Social links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-10 flex items-center gap-4"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-12 flex items-center gap-4"
           >
-            <div className="flex -space-x-3">
-              {[47, 12, 32, 68].map((n) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={n}
-                  src={`https://i.pravatar.cc/80?img=${n}`}
-                  alt=""
-                  className="h-10 w-10 rounded-full border-2 border-white object-cover"
-                />
+            <span className="text-sm text-white/40">Follow us</span>
+            <div className="flex gap-3">
+              {site.socials.map((s) => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all hover:border-brand hover:bg-brand hover:text-white"
+                >
+                  <Icon name={s.icon} className="h-4 w-4" />
+                </a>
               ))}
-            </div>
-            <div>
-              <div className="flex items-center gap-1 text-brand">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-brand" />
-                ))}
-              </div>
-              <p className="text-sm text-ink/60">
-                Trusted by 320+ happy clients
-              </p>
             </div>
           </motion.div>
         </div>
-
-        {/* right visual */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative lg:col-span-5"
-        >
-          <div className="relative mx-auto aspect-square max-w-md">
-            <div className="absolute inset-0 animate-float rounded-[2rem] bg-brand-gradient p-1 shadow-glow">
-              <div className="flex h-full w-full flex-col justify-between rounded-[1.9rem] bg-ink p-8 text-white">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-white/50">
-                    tech-vantage.app
-                  </span>
-                  <div className="flex gap-1.5">
-                    <span className="h-3 w-3 rounded-full bg-white/20" />
-                    <span className="h-3 w-3 rounded-full bg-white/20" />
-                    <span className="h-3 w-3 rounded-full bg-brand" />
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <div className="h-3 w-2/3 rounded-full bg-white/20" />
-                  <div className="h-3 w-1/2 rounded-full bg-white/10" />
-                  <div className="mt-6 grid grid-cols-3 gap-3">
-                    {["+140%", "4.8★", "0.9s"].map((v) => (
-                      <div
-                        key={v}
-                        className="rounded-xl bg-white/5 p-3 text-center"
-                      >
-                        <div className="text-lg font-bold text-brand-300">
-                          {v}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="h-11 rounded-full bg-brand text-center text-sm font-semibold leading-[2.75rem]">
-                  Launch 🚀
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/40"
+      >
+        <ChevronDown className="h-6 w-6 animate-bounce" />
+      </motion.div>
     </section>
   );
 }

@@ -1,22 +1,26 @@
-import { clients } from "@/data/testimonials";
+const words = [
+  "Logo Design",
+  "Website Development",
+  "Video Animation",
+  "Mobile Apps",
+  "SEO",
+  "Social Media",
+  "Branding",
+  "NFT Design",
+];
 
 export default function Marquee() {
-  const row = [...clients, ...clients];
+  const row = [...words, ...words];
   return (
-    <section className="border-y border-black/5 bg-white py-10">
-      <div className="container-tv mb-6 text-center">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-ink/40">
-          Trusted by ambitious brands
-        </p>
-      </div>
-      <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max animate-marquee gap-16 pr-16">
-          {row.map((c, i) => (
-            <span
-              key={`${c}-${i}`}
-              className="font-heading text-2xl font-bold text-ink/25 transition-colors hover:text-brand"
-            >
-              {c}
+    <section className="border-y border-white/10 bg-black py-8">
+      <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div className="flex w-max animate-marquee items-center gap-10 pr-10">
+          {row.map((w, i) => (
+            <span key={`${w}-${i}`} className="flex items-center gap-10">
+              <span className="text-stroke font-heading text-3xl font-extrabold uppercase sm:text-4xl">
+                {w}
+              </span>
+              <span className="h-2 w-2 rotate-45 bg-brand" />
             </span>
           ))}
         </div>

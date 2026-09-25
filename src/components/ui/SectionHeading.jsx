@@ -6,35 +6,24 @@ export default function SectionHeading({
   title,
   description,
   align = "center",
-  light = false,
   className,
 }) {
   const alignment =
     align === "center" ? "items-center text-center mx-auto" : "items-start text-left";
 
   return (
-    <div
-      className={cn(
-        "flex max-w-3xl flex-col gap-4",
-        alignment,
-        className
-      )}
-    >
+    <div className={cn("flex max-w-3xl flex-col gap-4", alignment, className)}>
       {eyebrow && (
         <Reveal>
           <span className="eyebrow">{eyebrow}</span>
         </Reveal>
       )}
       <Reveal delay={0.05}>
-        <h2 className={cn("heading-2 text-balance", light && "text-white")}>
-          {title}
-        </h2>
+        <h2 className="heading-2 text-balance text-white">{title}</h2>
       </Reveal>
       {description && (
         <Reveal delay={0.1}>
-          <p className={cn("lead text-balance", light && "text-white/70")}>
-            {description}
-          </p>
+          <p className="lead text-balance">{description}</p>
         </Reveal>
       )}
     </div>
