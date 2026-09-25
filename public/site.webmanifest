@@ -1,0 +1,12 @@
+{
+  "name": "Tech Vantage Now",
+  "short_name": "Tech Vantage",
+  "description": "Your digital design & marketing powerhouse",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0f66b8",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
