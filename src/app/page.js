@@ -4,9 +4,12 @@ import AboutPreview from "@/components/sections/AboutPreview";
 import ServicesSection from "@/components/sections/ServicesSection";
 import StatsSection from "@/components/sections/StatsSection";
 import PortfolioPreview from "@/components/sections/PortfolioPreview";
-import WhyUs from "@/components/sections/WhyUs";
+import Platforms from "@/components/sections/Platforms";
+import Reviews from "@/components/sections/Reviews";
+import FaqSection from "@/components/sections/FaqSection";
 import CtaSection from "@/components/sections/CtaSection";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, faqSchema, JsonLd } from "@/lib/seo";
+import { faqs } from "@/data/faq";
 
 export const metadata = buildMetadata({
   path: "/",
@@ -17,13 +20,16 @@ export const metadata = buildMetadata({
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={faqSchema(faqs.slice(0, 8))} />
       <Hero />
       <Marquee />
       <AboutPreview />
       <ServicesSection />
       <StatsSection />
       <PortfolioPreview />
-      <WhyUs />
+      <Platforms />
+      <Reviews count={9} />
+      <FaqSection />
       <CtaSection />
     </>
   );

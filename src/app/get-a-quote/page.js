@@ -13,7 +13,7 @@ export const metadata = buildMetadata({
 
 const perks = [
   "Free, no-obligation consultation",
-  "Get jaw-dropping designs",
+  "Get jaw-dropping designs at up to 70% off",
   "100% ownership rights & money-back guarantee",
   "Dedicated project manager",
 ];
@@ -21,49 +21,32 @@ const perks = [
 export default function QuotePage() {
   return (
     <>
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "Get a Quote", path: "/get-a-quote" },
-        ])}
-      />
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Get a Quote", path: "/get-a-quote" }])} />
       <PageHero
         eyebrow="Fill Out Your Details"
         title="Request your free quote"
         description="Ready to discuss your project? Fill in your relevant details. We will get back to you as soon as we can."
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Get a Quote", path: "/get-a-quote" },
-        ]}
+        breadcrumbs={[{ name: "Home", path: "/" }, { name: "Get a Quote", path: "/get-a-quote" }]}
       />
-
-      <section className="section bg-black">
+      <section className="section bg-white">
         <div className="container-tv grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <h2 className="heading-3 text-white">Why work with us</h2>
+            <h2 className="heading-3">Why work with us</h2>
             <ul className="mt-6 space-y-4">
               {perks.map((p) => (
                 <li key={p} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-white">
                     <Check className="h-3.5 w-3.5" />
                   </span>
-                  <span className="text-white/70">{p}</span>
+                  <span className="text-ink/70">{p}</span>
                 </li>
               ))}
             </ul>
-
-            <div className="mt-10 rounded-3xl glass p-8">
-              <p className="text-lg font-medium text-white">
-                &ldquo;Feeling overwhelmed? Let our consultant guide your
-                way.&rdquo;
-              </p>
-              <p className="mt-3 text-sm text-white/50">
-                We&apos;ll help you scope the right solution for your budget and
-                goals.
-              </p>
+            <div className="mt-10 rounded-3xl border border-ink/5 bg-cloud p-8">
+              <p className="text-lg font-medium text-ink">&ldquo;Feeling overwhelmed? Let our consultant guide your way.&rdquo;</p>
+              <p className="mt-3 text-sm text-ink/50">We&apos;ll help you scope the right solution for your budget and goals.</p>
             </div>
           </div>
-
           <div className="lg:col-span-3">
             <Reveal direction="left">
               <ContactForm withBudget />

@@ -3,6 +3,7 @@ export const services = [
   {
     slug: "logo-design",
     title: "Logo Design",
+    image: "/assets/images/logodesign.webp",
     icon: "pen-tool",
     short: "Unique Logo Designs that make your brand unforgettable.",
     hero: "Unique Logo Designs",
@@ -27,6 +28,7 @@ export const services = [
   {
     slug: "website-development",
     title: "Website Development",
+    image: "/assets/images/website.png",
     icon: "layout-template",
     short: "Rule the digital world with a modern website.",
     hero: "Rule The Digital World With A Modern Website",
@@ -55,6 +57,7 @@ export const services = [
   {
     slug: "mobile-app-development",
     title: "Mobile Apps",
+    image: "/assets/images/mobile-pic.png",
     icon: "smartphone",
     short: "Mobile apps that offer incredible user experience.",
     hero: "Mobile Apps That Offer Incredible User Experience",
@@ -79,6 +82,7 @@ export const services = [
   {
     slug: "video-animation",
     title: "Video Animation",
+    image: "/assets/images/video-edit.jpg",
     icon: "clapperboard",
     short: "Self-explanatory video animation that keeps audiences watching.",
     hero: "Self-explanatory Video Animation",
@@ -103,6 +107,7 @@ export const services = [
   {
     slug: "seo",
     title: "SEO",
+    image: "/assets/images/seo2.png",
     icon: "trending-up",
     short: "Results-oriented SEO that grows traffic and revenue.",
     hero: "Rev up your online presence with SEO magic",
@@ -131,6 +136,7 @@ export const services = [
   {
     slug: "social-media-marketing",
     title: "Social Media",
+    image: "/assets/images/smm.png",
     icon: "megaphone",
     short: "Social media marketing that grows and engages your audience.",
     hero: "Social Media Marketing",

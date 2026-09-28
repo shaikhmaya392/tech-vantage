@@ -37,16 +37,19 @@ export const site = {
       name: "Facebook",
       href: "https://facebook.com/profile.php?id=61550707577306",
       icon: "facebook",
+      png: "/assets/images/facebook.png",
     },
     {
       name: "Instagram",
       href: "https://instagram.com/techvantage.now/",
       icon: "instagram",
+      png: "/assets/images/instagram.png",
     },
     {
       name: "LinkedIn",
       href: "https://www.linkedin.com/company/tech-vantage-now/",
       icon: "linkedin",
+      png: "/assets/images/linkedin.png",
     },
   ],
 };

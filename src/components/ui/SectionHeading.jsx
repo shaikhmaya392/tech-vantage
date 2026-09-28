@@ -6,6 +6,7 @@ export default function SectionHeading({
   title,
   description,
   align = "center",
+  light = false,
   className,
 }) {
   const alignment =
@@ -19,11 +20,11 @@ export default function SectionHeading({
         </Reveal>
       )}
       <Reveal delay={0.05}>
-        <h2 className="heading-2 text-balance text-white">{title}</h2>
+        <h2 className={cn("heading-2 text-balance", light && "text-white")}>{title}</h2>
       </Reveal>
       {description && (
         <Reveal delay={0.1}>
-          <p className="lead text-balance">{description}</p>
+          <p className={cn("lead text-balance", light && "text-white/60")}>{description}</p>
         </Reveal>
       )}
     </div>

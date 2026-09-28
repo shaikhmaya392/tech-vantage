@@ -2,7 +2,6 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/ui/ContactForm";
-import Icon from "@/components/ui/Icon";
 import { buildMetadata, breadcrumbSchema, JsonLd } from "@/lib/seo";
 import { site } from "@/data/site";
 
@@ -23,78 +22,41 @@ const details = [
 export default function ContactPage() {
   return (
     <>
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "Contact", path: "/contact" },
-        ])}
-      />
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])} />
       <PageHero
         eyebrow="Get In Touch"
         title="Let's create the future"
         description="Have a project in mind? Fill in your details and we'll get back to you as soon as we can."
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Contact", path: "/contact" },
-        ]}
+        breadcrumbs={[{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]}
       />
 
-      <section className="section bg-black">
+      <section className="section bg-white">
         <div className="container-tv grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <h2 className="heading-3 text-white">Contact details</h2>
-            <p className="mt-3 text-white/60">
-              Reach us through any channel below, or use the form and we&apos;ll
-              respond fast.
-            </p>
-
+            <h2 className="heading-3">Contact details</h2>
+            <p className="mt-3 text-ink/60">Reach us through any channel below, or use the form and we&apos;ll respond fast.</p>
             <div className="mt-8 space-y-4">
               {details.map((d) => {
                 const Cmp = d.icon;
-                const content = (
-                  <div className="flex items-start gap-4 rounded-2xl glass p-5 transition-colors hover:border-brand/40">
+                const inner = (
+                  <div className="flex items-start gap-4 rounded-2xl border border-ink/5 bg-cloud p-5 transition hover:border-brand/30">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
                       <Cmp className="h-5 w-5" />
                     </span>
                     <div>
-                      <div className="text-xs uppercase tracking-wide text-white/40">
-                        {d.label}
-                      </div>
-                      <div className="font-medium text-white">{d.value}</div>
+                      <div className="text-xs uppercase tracking-wide text-ink/40">{d.label}</div>
+                      <div className="font-medium text-ink">{d.value}</div>
                     </div>
                   </div>
                 );
                 return d.href ? (
-                  <a key={d.label} href={d.href} className="block">
-                    {content}
-                  </a>
+                  <a key={d.label} href={d.href} className="block">{inner}</a>
                 ) : (
-                  <div key={d.label}>{content}</div>
+                  <div key={d.label}>{inner}</div>
                 );
               })}
             </div>
-
-            <div className="mt-8">
-              <div className="mb-3 text-sm font-medium text-white/60">
-                Let&apos;s connect on social media
-              </div>
-              <div className="flex gap-3">
-                {site.socials.map((s) => (
-                  <a
-                    key={s.name}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.name}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all hover:border-brand hover:bg-brand hover:text-white"
-                  >
-                    <Icon name={s.icon} className="h-5 w-5" />
-                  </a>
-                ))}
-              </div>
-            </div>
           </div>
-
           <div className="lg:col-span-3">
             <Reveal direction="left">
               <ContactForm />
@@ -103,9 +65,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-black pb-20">
+      <section className="bg-white pb-20">
         <div className="container-tv">
-          <div className="overflow-hidden rounded-[2rem] border border-white/10">
+          <div className="overflow-hidden rounded-[2rem] border border-ink/10">
             <iframe
               title="Tech Vantage Now office location"
               src="https://www.google.com/maps?q=60+Tower+Pl+Yonkers+NY+10703&output=embed"
@@ -113,7 +75,7 @@ export default function ContactPage() {
               height="400"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="border-0 grayscale invert-[0.9]"
+              className="border-0"
             />
           </div>
         </div>

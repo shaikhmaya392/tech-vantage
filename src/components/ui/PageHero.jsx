@@ -4,10 +4,10 @@ import Reveal from "./Reveal";
 
 export default function PageHero({ eyebrow, title, description, breadcrumbs = [] }) {
   return (
-    <section className="relative overflow-hidden bg-black pt-36 pb-20">
-      <div className="absolute inset-0 bg-radial-brand opacity-80" />
-      <div className="absolute inset-0 bg-grid opacity-30" />
-      <div className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-brand/30 blur-3xl" />
+    <section className="relative overflow-hidden bg-ink pt-40 pb-20 text-white">
+      <div className="pointer-events-none absolute inset-0 bg-dots opacity-20" />
+      <div className="pointer-events-none absolute -right-20 top-16 h-80 w-80 rounded-full bg-brand/30 blur-3xl" />
+      <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-brand/20 blur-3xl" />
       <div className="container-tv relative">
         {breadcrumbs.length > 0 && (
           <Reveal>
@@ -32,13 +32,13 @@ export default function PageHero({ eyebrow, title, description, breadcrumbs = []
         )}
         {eyebrow && (
           <Reveal>
-            <span className="eyebrow">{eyebrow}</span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-300">
+              {eyebrow}
+            </span>
           </Reveal>
         )}
         <Reveal delay={0.05}>
-          <h1 className="mt-5 heading-1 max-w-4xl text-balance text-white">
-            {title}
-          </h1>
+          <h1 className="mt-5 heading-1 max-w-4xl text-balance text-white">{title}</h1>
         </Reveal>
         {description && (
           <Reveal delay={0.1}>
