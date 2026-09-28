@@ -1,4 +1,4 @@
-import { Poppins, Inter } from "next/font/google";
+import { Outfit, DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { organizationSchema, localBusinessSchema, JsonLd } from "@/lib/seo";
@@ -6,17 +6,24 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const poppins = Poppins({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-outfit",
   display: "swap",
 });
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dmsans",
+  display: "swap",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-syne",
   display: "swap",
 });
 
@@ -70,14 +77,14 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0f66b8",
+  themeColor: "#FFAA17",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${dmSans.variable} ${syne.variable}`}>
       <body>
         <JsonLd data={organizationSchema()} />
         <JsonLd data={localBusinessSchema()} />

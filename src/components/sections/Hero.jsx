@@ -39,7 +39,7 @@ export default function Hero() {
   const typed = useTypewriter(site.heroTypewriter);
 
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-ink">
+    <section className="relative flex min-h-[94vh] items-center overflow-hidden bg-ink">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src={site.heroVideo}
@@ -50,8 +50,23 @@ export default function Hero() {
         preload="auto"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
+      {/* Digiplus-style orange → dark gradient wash */}
+      <div className="absolute inset-0 bg-[linear-gradient(300deg,rgba(255,170,23,0.55)_0%,rgba(34,36,41,0.92)_55%)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/60" />
+
+      {/* Rotated outline stroke word */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-6 top-1/2 hidden -translate-y-1/2 -rotate-90 select-none font-display text-[7rem] font-extrabold uppercase tracking-tight stroke-text lg:block"
+      >
+        Creative
+      </span>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-4 bottom-10 select-none font-display text-[22vw] font-extrabold uppercase leading-none stroke-text opacity-40 lg:text-[13rem]"
+      >
+        Digital
+      </span>
 
       <div className="container-tv relative z-10 pt-32">
         <div className="max-w-3xl">
