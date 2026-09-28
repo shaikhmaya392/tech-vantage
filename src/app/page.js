@@ -3,6 +3,7 @@ import Marquee from "@/components/sections/Marquee";
 import AboutPreview from "@/components/sections/AboutPreview";
 import ServicesSection from "@/components/sections/ServicesSection";
 import StatsSection from "@/components/sections/StatsSection";
+import WorkingProcess from "@/components/sections/WorkingProcess";
 import PortfolioPreview from "@/components/sections/PortfolioPreview";
 import Platforms from "@/components/sections/Platforms";
 import Reviews from "@/components/sections/Reviews";
@@ -26,6 +27,7 @@ export default function HomePage() {
       <AboutPreview />
       <ServicesSection />
       <StatsSection />
+      <WorkingProcess />
       <PortfolioPreview />
       <Platforms />
       <Reviews count={9} />
