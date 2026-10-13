@@ -1,54 +1,51 @@
-# Tech Vantage Now — Website
+# Shaheer Shaikh — Portfolio (HTML / CSS / JS)
 
-A modern, creative, SEO-friendly marketing website for **Tech Vantage Now**, a US-based digital design & marketing agency. Built with Next.js (App Router), Tailwind CSS and rich scroll animations.
+## Colors & fonts (one place)
+`css/tokens.css`
+- `--brand` (#0048a9), `--black`, `--white` — the whole site uses these.
+- `--font-heading` (Poppins) and `--font-body` (Inter). To change a font, also edit
+  the Google Fonts `@import` line at the top of the same file.
 
-## ✨ Features
+## Content
+- `js/data.js` — contact info, all 30 projects, testimonials, blog list, logo.
+  Add a project = add one line to `PROJECTS` (`featured: true` puts it in the home slider).
+- `js/bot.js` — the chatbot's answers (English + Roman Urdu). Each topic has
+  keywords and an `en` / `ur` reply — edit or add topics there.
+- Menu links: `NAV` in `js/main.js`. Page text is in each `.html`; articles in `/blog`;
+  one page per service in `/services`.
+- Hero animation (the website being built): the `SITES` list in `js/main.js`.
 
-- **Next.js 14 (App Router)** — server-rendered, fast, SEO-first
-- **Tailwind CSS** design system — brand colors `#0f66b8`, `#000`, `#fff`
-- **Fonts:** Poppins (headings) + Inter (body) via `next/font`
-- **Animations:** Framer Motion (reveals, stagger), GSAP (hero), Lenis (smooth scroll), Swiper (testimonials/sliders)
-- **Fully responsive** and accessible (reduced-motion aware)
-- **SEO:** per-page metadata, Open Graph + Twitter cards, JSON-LD structured data (Organization, LocalBusiness, Service, FAQ, Breadcrumb, Article), auto `sitemap.xml` + `robots.txt`, dynamic OG image
-- **Forms:** React Hook Form + Zod validation
+## Project screenshots (full page)
+By default every card shows a live full-page screenshot of the real website,
+generated automatically (`shots: "live"` in `js/data.js`). The first time a
+site is shown, the preview can take a few seconds to appear.
 
-## 🗂️ Pages (18)
-
-Home · About · Services (overview) · 6 service detail pages · Portfolio (filterable) · Case study detail · Pricing · Blog · Blog post · Contact · Get a Quote · FAQ · Privacy Policy · Terms · 404
-
-## 🚀 Getting started
-
-```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build (+ generates sitemap/robots)
-npm start        # serve production build
+For your own WebP screenshots (faster, never change):
 ```
-
-## 🧱 Structure
-
+npm i playwright sharp
+npx playwright install chromium
+node tools/take-screenshots.mjs
 ```
-src/
-├── app/            # routes (App Router) + layout, metadata, opengraph-image
-├── components/
-│   ├── layout/     # Navbar, Footer, SmoothScroll
-│   ├── sections/   # Home + shared page sections
-│   └── ui/         # Buttons, cards, Reveal, Accordion, Counter, forms…
-├── data/           # site, services, portfolio, blog, testimonials, pricing, faq
-└── lib/            # seo helpers, utils, useGSAP hook
-```
+This saves `assets/shots/<slug>.webp` for all 30 projects. Then set
+`shots: "local"` in `js/data.js`. Re-run for one site: `node tools/take-screenshots.mjs qulfiwala`.
 
-## ✏️ Editing content
+## Logos, profile photo, CV
+Loaded from the old site (`assetBase` in `js/data.js`). To host them yourself,
+copy `icons/`, `profile.jpg` and `Shaheer-CV.pdf` from the old project into
+`/assets` and set `assetBase: "assets"`.
 
-All content lives in `src/data/*`. Update those files to change services, portfolio
-projects, blog posts, pricing, testimonials and FAQs. Replace the placeholder
-`picsum.photos` / `pravatar.cc` images with real assets when ready.
+## Currency
+Prices are written in USD. Visitors automatically see them in their own currency
+(Pakistan → PKR, UK → GBP, UAE → AED, Saudi → SAR, Europe → EUR, etc.), detected
+from their time zone, with live exchange rates from open.er-api.com. Visitors can
+also switch currency (footer and pricing page). Edit the list of currencies,
+rounding and fallback rates in `CURRENCY` in `js/data.js`.
 
-### Contact form
-The form currently has **no backend** — it opens a prefilled email to
-`info@techvantagenow.com`. Wire it to an email service (Resend, Formspree, an API
-route, etc.) for automated handling.
+## Contact form
+Set `formEndpoint` in `js/data.js` (e.g. a free Formspree URL) to receive
+messages by email. Without it, the form opens the visitor's email app.
 
-## 🔍 SEO config
-- Site URL and metadata: `src/data/site.js` and `src/lib/seo.js`
-- Sitemap/robots: `next-sitemap.config.js` (runs on `postbuild`)
+## Deploy
+Upload the folder to Vercel/Netlify. `vercel.json` gives clean URLs and caching.
+If you use a new domain, update it in `sitemap.xml`, `robots.txt` and the
+`<link rel="canonical">` tags (search for `shaheer-portfolio-theta`).
