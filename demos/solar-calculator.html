@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SunWise — solar savings calculator demo by Shaheer Shaikh</title>
+<meta name="description" content="Custom-coded solar savings quiz funnel: 4 quick questions, an instant personalised estimate and lead capture. Demo project by Shaheer Shaikh.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--n:#06213f;--n2:#0b2f57;--sun:#ffb020;--sun2:#ffcf6b;--g:#22c55e;--ink:#0b1626;--mu:#5c6879;--line:#e4e9f0;--bg:#f5f7fb;--head:"Poppins",system-ui,sans-serif;--body:"Inter",system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html,body{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}button,input{font:inherit;color:inherit}button{cursor:pointer}h1,h2,h3{font-family:var(--head);margin:0;letter-spacing:-.025em}p{margin:0}
+:focus-visible{outline:2px solid var(--sun);outline-offset:2px;border-radius:8px}
+.demo-bar{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;background:#000;color:#fff;font-size:12.5px}.demo-bar a{color:#fff;font-weight:700;text-decoration:none}.demo-bar b{color:var(--sun2)}.in-frame .demo-bar{display:none}
+.hero{position:relative;isolation:isolate;color:#fff;padding:1.2rem 0 9rem;overflow:hidden}
+.hero>img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,rgba(6,33,63,.97) 15%,rgba(6,33,63,.75) 55%,rgba(6,33,63,.35))}
+.c{width:min(100% - 2.4rem,1160px);margin-inline:auto}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0 2.6rem}
+.logo{display:flex;align-items:center;gap:.6rem;font:800 21px var(--head)}
+.logo i{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--sun) 40%,transparent 42%),conic-gradient(from 0deg,var(--sun) 0 10deg,transparent 10deg 45deg,var(--sun) 45deg 55deg,transparent 55deg 90deg,var(--sun) 90deg 100deg,transparent 100deg 135deg,var(--sun) 135deg 145deg,transparent 145deg 180deg,var(--sun) 180deg 190deg,transparent 190deg 225deg,var(--sun) 225deg 235deg,transparent 235deg 270deg,var(--sun) 270deg 280deg,transparent 280deg 315deg,var(--sun) 315deg 325deg,transparent 325deg);animation:rot 20s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.nav span{font-size:13.5px;opacity:.85}.nav span b{color:var(--sun2)}
+.hero h1{font-size:clamp(2.4rem,1.4rem + 3.6vw,4.4rem);max-width:15ch;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.hero p.l{font-size:18px;opacity:.85;max-width:46ch;margin-top:1.1rem}
+.trust{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:1.8rem;font-size:14px;opacity:.9}
+.trust b{display:block;font:700 22px var(--head);color:var(--sun2)}
+.box{position:relative;z-index:3;margin:-7rem auto 3rem;width:min(100% - 2.4rem,980px);background:#fff;border-radius:26px;box-shadow:0 40px 90px -40px rgba(6,33,63,.55);overflow:hidden}
+.bar{height:6px;background:var(--line)}.bar i{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--sun),#ff7a1a);transition:width .6s var(--ease)}
+.inner{padding:2.2rem 2.4rem 2rem}
+.meta{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:var(--mu);margin-bottom:.8rem}
+.q{display:none;animation:in .45s var(--ease)}.q.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.q h2{font-size:clamp(1.5rem,1.2rem + 1vw,2rem)}.q>p{color:var(--mu);margin:.35rem 0 1.5rem}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.opt{display:grid;justify-items:center;gap:.6rem;padding:1.3rem .8rem;border-radius:18px;border:2px solid var(--line);background:#fff;font-weight:600;text-align:center;transition:all .25s}
+.opt:hover{border-color:var(--sun2);transform:translateY(-3px)}
+.opt[aria-pressed=true]{border-color:var(--sun);background:#fff8ea;box-shadow:0 0 0 4px #fff1d1}
+.opt svg{width:44px;height:44px;color:var(--n2)}
+.opt small{color:var(--mu);font-weight:500;font-size:12.5px}
+.big{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.6rem}.big b{font:800 54px var(--head);letter-spacing:-.04em}.big span{color:var(--mu)}
+input[type=range]{width:100%;accent-color:var(--sun);height:6px}
+.ticks{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mu);margin-top:.4rem}
+.fld{display:grid;gap:.35rem}.fld label{font-weight:600;font-size:13.5px}
+.inp{width:100%;padding:.9rem 1rem;border-radius:12px;border:1.5px solid var(--line);outline:none}
+.inp:focus{border-color:var(--sun);box-shadow:0 0 0 4px #fff1d1}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.nav2{display:flex;justify-content:space-between;align-items:center;margin-top:1.8rem;padding-top:1.3rem;border-top:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.5rem;border-radius:999px;border:0;background:var(--n);color:#fff;font-weight:700;transition:all .25s}
+.btn:hover{background:var(--n2);transform:translateY(-1px)}.btn--sun{background:var(--sun);color:var(--n)}.btn--sun:hover{background:var(--sun2)}
+.btn--g{background:transparent;color:var(--mu)}.btn--g:hover{background:var(--bg);transform:none}
+.btn svg{width:17px;height:17px}
+.err{color:#b91c1c;font-size:13.5px;min-height:1.2em;margin-top:.6rem}
+/* results */
+.res{display:none}.res.on{display:block;animation:in .5s var(--ease)}
+.rhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;align-items:end;margin-bottom:1.4rem}
+.rhead h2{font-size:clamp(1.6rem,1.2rem + 1.4vw,2.3rem)}.rhead p{color:var(--mu)}
+.chip{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .8rem;border-radius:999px;background:#e8f7ee;color:#15803d;font-weight:700;font-size:13px}
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.kp div{padding:1rem;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.kp div.hl{background:var(--n);color:#fff;border-color:var(--n)}
+.kp small{display:block;color:var(--mu);font-size:12.5px;font-weight:600}.kp .hl small{color:#b9c6d8}
+.kp b{display:block;font:800 26px var(--head);letter-spacing:-.03em;margin-top:.2rem}.kp .hl b{color:var(--sun)}
+.chart{margin-top:1.4rem;padding:1.2rem;border-radius:18px;border:1px solid var(--line)}
+.chart h3{font-size:15px;display:flex;justify-content:space-between}.chart h3 span{font:500 13px var(--body);color:var(--mu)}
+.cols{display:grid;grid-template-columns:repeat(20,1fr);align-items:end;gap:4px;height:170px;margin-top:1rem;position:relative}
+.cols i{border-radius:5px 5px 0 0;background:#cdd7e5;height:0;transition:height .8s var(--ease)}
+.cols i.p{background:linear-gradient(180deg,var(--sun),#ff8a1a)}
+.cols .be{position:absolute;left:0;right:0;border-top:2px dashed var(--n);font-size:11.5px;font-weight:700;color:var(--n);transition:bottom .8s var(--ease)}
+.cols .be span{position:absolute;right:0;top:-1.5rem;background:#fff;padding:0 .3rem}
+.ax{display:flex;justify-content:space-between;font-size:12px;color:var(--mu);margin-top:.4rem}
+.eco{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
+.eco div{display:flex;gap:.7rem;align-items:center;padding:.9rem;border-radius:14px;background:#f2fbf5;font-size:13.5px}
+.eco b{display:block;font:700 18px var(--head);color:#15803d}
+.eco span.e{font-size:26px}
+.lead{margin-top:1.4rem;display:grid;grid-template-columns:1fr 1fr auto;gap:.7rem;align-items:end;padding:1.3rem;border-radius:18px;background:#fff8ea;border:1px solid #ffe2a6}
+.lead h3{grid-column:1/-1;font-size:17px}
+.ok{grid-column:1/-1;display:none;font-weight:600;color:#15803d}.ok.on{display:block}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0 auto 3rem;width:min(100% - 2.4rem,980px)}
+.why div{padding:1.3rem;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.why b{display:block;font:700 16px var(--head);margin-bottom:.3rem}.why p{color:var(--mu);font-size:14px}
+@media (max-width:760px){.opts,.kp,.eco,.why{grid-template-columns:1fr 1fr}.lead,.two{grid-template-columns:1fr}.inner{padding:1.5rem 1.2rem}.nav span{display:none}.cols{grid-template-columns:repeat(20,1fr);gap:2px}}
+@media (max-width:420px){.opts,.why{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-bar"><span><b>DEMO</b> · SunWise solar savings funnel — custom-coded by Shaheer Shaikh (fictional brand, sample figures)</span><a href="../projects/demo-solar-calculator.html">← Back to project</a></div>
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&fm=webp&q=72&w=1800" alt="">
+  <div class="c">
+    <div class="nav"><span class="logo"><i aria-hidden="true"></i>SunWise</span><span>Rated <b>4.9★</b> by 2,300 homeowners</span></div>
+    <h1>See how much you'd save with <em>solar</em> — in 60 seconds.</h1>
+    <p class="l">Answer four quick questions and get a personalised estimate of your system size, savings and payback.</p>
+    <div class="trust"><div><b>25 yrs</b>Panel warranty</div><div><b>0%</b>Finance available</div><div><b>3,800+</b>Installs</div></div>
+  </div>
+</section>
+
+<main class="box" aria-label="Solar savings calculator">
+  <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+  <div class="inner">
+    <form id="quiz" novalidate>
+      <div class="meta"><span id="qn">Question 1 of 4</span><span id="qt">About 60 seconds</span></div>
+      <section class="q on" data-q="0"><h2>What type of property is it?</h2><p>This sets typical roof size and usage.</p>
+        <div class="opts" data-k="type"><button type="button" class="opt" data-v="house" aria-pressed="false"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 22 24 8l18 14M10 19v21h28V19M20 40V28h8v12"/></svg>House<small>Detached or semi</small></button><button type="button" class="opt" data-v="business" aria-pressed="false"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="8" y="10" width="20" height="30" rx="2"/><path d="M28 18h12v22H28M14 17h8M14 24h8M14 31h8"/></svg>Business<small>Office or shop</small></button><button type="button" class="opt" data-v="farm" aria-pressed="false"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 40h36M10 40V22l10-8 10 8v18M30 40V28h12v12M16 40v-8h8v8"/></svg>Factory / farm<small>Large roof area</small></button></div>
+      </section>
+      <section class="q" data-q="1"><h2>What's your average monthly electricity bill?</h2><p>Drag the slider — a rough number is fine.</p>
+        <div class="big"><b id="billV">$220</b><span>per month</span></div><input type="range" id="bill" min="50" max="900" step="10" value="220" aria-label="Monthly bill"><div class="ticks"><span>$50</span><span>$450</span><span>$900+</span></div>
+      </section>
+      <section class="q" data-q="2"><h2>Which way does your roof mostly face?</h2><p>South-facing roofs produce the most power, but every direction works.</p>
+        <div class="opts" data-k="roof"><button type="button" class="opt" data-v="1" aria-pressed="false"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="24" cy="24" r="16"/><path d="m24 14 5 14-5-3-5 3z" fill="currentColor"/></svg>South<small>Best output</small></button><button type="button" class="opt" data-v=".88" aria-pressed="false"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="24" cy="24" r="16"/><path d="m34 24-14 5 3-5-3-5z" fill="currentColor"/></svg>East / West<small>Very good</small></button><button type="button" class="opt" data-v=".95" aria-pressed="false"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 34h32M14 34l10-16 10 16"/></svg>Flat roof<small>Panels angled</small></button></div>
+      </section>
+      <section class="q" data-q="3"><h2>Where is the property?</h2><p>Sunshine and local rates change the numbers.</p>
+        <div class="opts" data-k="sun"><button type="button" class="opt" data-v="6" aria-pressed="false"><span style="font-size:38px">☀️</span>Very sunny<small>Gulf · South Asia</small></button><button type="button" class="opt" data-v="4.6" aria-pressed="false"><span style="font-size:38px">🌤️</span>Sunny<small>Australia · US South</small></button><button type="button" class="opt" data-v="3.2" aria-pressed="false"><span style="font-size:38px">⛅</span>Mixed<small>UK · Northern Europe</small></button></div>
+      </section>
+      <p class="err" id="err" role="alert"></p>
+      <div class="nav2" id="nav2"><button type="button" class="btn btn--g" id="back">← Back</button><button type="button" class="btn" id="next">Next question <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    </form>
+
+    <section class="res" id="res" aria-live="polite">
+      <div class="rhead"><div><span class="chip">✓ Your estimate is ready</span><h2 style="margin-top:.6rem">You could save <span id="rSave" style="color:#ff8a1a">$0</span> a year</h2><p id="rLine"></p></div><button class="btn btn--g" id="redo">↺ Change answers</button></div>
+      <div class="kp"><div><small>System size</small><b id="rKw"></b></div><div><small>Panels</small><b id="rPan"></b></div><div><small>Estimated cost</small><b id="rCost"></b></div><div class="hl"><small>Payback</small><b id="rPay"></b></div></div>
+      <div class="chart"><h3>Cumulative savings over 20 years <span id="r20"></span></h3><div class="cols" id="cols"><span class="be" id="be"><span>System cost</span></span></div><div class="ax"><span>Year 1</span><span>Year 10</span><span>Year 20</span></div></div>
+      <div class="eco"><div><span class="e">🌳</span><span><b id="eT"></b>trees planted, every year</span></div><div><span class="e">🌍</span><span><b id="eC"></b>CO₂ avoided per year</span></div><div><span class="e">🔋</span><span><b id="eE"></b>of your power, from the sun</span></div></div>
+      <form class="lead" id="lead"><h3>Get your exact quote and roof design — free</h3><div class="fld"><label for="ln">Name</label><input class="inp" id="ln" required autocomplete="name"></div><div class="fld"><label for="lp">Phone / WhatsApp</label><input class="inp" id="lp" required type="tel" autocomplete="tel"></div><button class="btn btn--sun">Send my quote</button><p class="ok" id="ok" role="status"></p></form>
+    </section>
+  </div>
+</main>
+<div class="why"><div><b>No-pressure survey</b><p>A specialist checks your roof with satellite imaging first.</p></div><div><b>Fixed price</b><p>The quote you sign is the price you pay — no surprises.</p></div><div><b>Installed in 1 day</b><p>Most homes are fully installed and live within one day.</p></div></div>
+
+<script src="demo.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const A={type:null,roof:null,sun:null};let q=0;
+const money=n=>"$"+Math.round(n).toLocaleString();
+$$(".opts").forEach(g=>g.onclick=e=>{const b=e.target.closest(".opt");if(!b)return;A[g.dataset.k]=b.dataset.v;g.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-pressed",x===b));$("#err").textContent="";setTimeout(()=>{if(q<3)show(q+1);else results()},280)});
+$("#bill").oninput=e=>$("#billV").textContent="$"+e.target.value+(+e.target.value>=900?"+":"");
+function show(n){q=n;$$(".q").forEach(x=>x.classList.toggle("on",+x.dataset.q===n));$("#bar").style.width=((n+1)/4*100)+"%";$("#qn").textContent=`Question ${n+1} of 4`;$("#qt").textContent=["About 60 seconds","45 seconds left","30 seconds left","Last one!"][n];$("#back").style.visibility=n?"visible":"hidden";$("#next").innerHTML=n===3?'See my savings <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>':'Next question <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'}
+$("#next").onclick=()=>{const need=["type",null,"roof","sun"][q];if(need&&!A[need]){$("#err").textContent="Choose one option to continue.";return}q<3?show(q+1):results()};
+$("#back").onclick=()=>show(Math.max(0,q-1));
+function results(){if(!A.sun){$("#err").textContent="Choose one option to continue.";return}
+ const bill=+$("#bill").value,sun=+A.sun,roof=+(A.roof||1),k={house:1,business:1.12,farm:1.25}[A.type||"house"];
+ const kwh=bill/0.16,kw=Math.max(3,(kwh/(sun*30*roof))*0.9),pan=Math.ceil(kw*1000/430),cost=kw*1050*k,save=Math.min(bill*12*.92,kw*sun*365*roof*.16),pay=cost/save;
+ $("#rSave").textContent=money(save);$("#rLine").textContent=`Based on a ${money(bill)} monthly bill and ${sun} peak sun hours a day.`;
+ $("#rKw").textContent=kw.toFixed(1)+" kW";$("#rPan").textContent=pan;$("#rCost").textContent=money(cost);$("#rPay").textContent=pay.toFixed(1)+" yrs";
+ const tot=save*20*1.12;$("#r20").textContent=money(tot-cost)+" net over 20 years";
+ const cols=$("#cols");cols.querySelectorAll("i").forEach(i=>i.remove());const max=tot;
+ for(let y=1;y<=20;y++){const v=save*y*(1+y*.006),i=document.createElement("i");i.className=v>cost?"p":"";i.title=`Year ${y}: ${money(v)}`;cols.appendChild(i);requestAnimationFrame(()=>requestAnimationFrame(()=>i.style.height=(v/max*100)+"%"))}
+ $("#be").style.bottom=(cost/max*100)+"%";
+ $("#eT").textContent=Math.round(kw*12);$("#eC").textContent=(kw*sun*365*.0004).toFixed(1)+" t";$("#eE").textContent=Math.min(100,Math.round(save/(bill*12)*100))+"%";
+ $("#quiz").style.display="none";$("#res").classList.add("on");$("#bar").style.width="100%"}
+$("#redo").onclick=()=>{$("#res").classList.remove("on");$("#quiz").style.display="";show(0)};
+$("#lead").onsubmit=e=>{e.preventDefault();const n=$("#ln"),p=$("#lp");if(!n.value||!p.value){(n.value?p:n).focus();return}$("#ok").textContent=`Thanks ${n.value.split(" ")[0]}! A solar advisor will call ${p.value} within 24 hours with your exact quote.`;$("#ok").classList.add("on");e.target.querySelectorAll("input").forEach(i=>i.value="")};
+show(0);
+</script>
+</body>
+</html>

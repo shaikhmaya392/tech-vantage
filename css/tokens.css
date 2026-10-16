@@ -1,0 +1,59 @@
+/* ==========================================================================
+   DESIGN TOKENS — change colors & fonts HERE and the whole site updates.
+   ========================================================================== */
+
+/* 1) FONTS — to switch typefaces, change this one Google Fonts URL
+      AND the two --font-* variables below. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap");
+
+:root {
+  /* ---------- Brand colors ---------- */
+  --brand: #0048a9;          /* primary blue */
+  --black: #000000;          /* ink */
+  --white: #ffffff;          /* paper */
+
+  /* Shades derived from the brand blue (edit if you change --brand) */
+  --brand-dark: #003680;
+  --brand-soft: #e8f0fb;     /* light blue tint for backgrounds */
+  --brand-line: #c9daf2;     /* light blue border */
+
+  /* Neutrals */
+  --text: var(--black);
+  --text-muted: #4a5160;
+  --surface: #eef3fa;        /* light blue-grey section background */
+  --line: #e3e7ee;           /* borders / dividers */
+
+  /* ---------- Typography ---------- */
+  --font-heading: "Poppins", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Type scale */
+  --fs-xs: 0.8125rem;   /* 13px */
+  --fs-sm: 0.9375rem;   /* 15px */
+  --fs-base: 1.0625rem; /* 17px */
+  --fs-lg: 1.25rem;     /* 20px */
+  --fs-xl: clamp(1.5rem, 1.2rem + 1vw, 1.875rem);
+  --fs-2xl: clamp(2rem, 1.4rem + 2.2vw, 3rem);
+  --fs-3xl: clamp(2.25rem, 1.35rem + 3.3vw, 4rem);
+  --fs-hero: clamp(4rem, 1.5rem + 9.5vw, 9.5rem);
+
+  /* ---------- Layout ---------- */
+  --container: 1240px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --section: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+
+  /* Radius: small for controls, larger for media */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+
+  /* Shadows tinted with the brand blue */
+  --shadow-sm: 0 2px 8px rgba(0, 72, 169, 0.06);
+  --shadow-md: 0 14px 40px -12px rgba(0, 72, 169, 0.22);
+  --shadow-lg: 0 30px 70px -24px rgba(0, 38, 92, 0.35);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.45s;
+}
